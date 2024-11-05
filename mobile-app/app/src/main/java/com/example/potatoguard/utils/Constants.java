@@ -1,2 +1,4 @@
-package com.example.potatoguard.utils;public class Constants {
+package com.example.potatoguard.utils;
+
+public class Constants {
 }

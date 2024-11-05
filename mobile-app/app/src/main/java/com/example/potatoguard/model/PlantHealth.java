@@ -1,2 +1,4 @@
-package com.example.potatoguard.model;public class PotatoDisease {
+package com.example.potatoguard.model;
+
+public class PlantHealth {
 }
