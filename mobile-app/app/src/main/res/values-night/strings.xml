@@ -1,5 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">PotatoGuard</string>
     <string name="upload_plant_image_msg">Use below buttons to select a picture of a potato plant leaf.</string>
-    <string name="title_label">Potato Disease\nPrediction App</string>
 </resources>
