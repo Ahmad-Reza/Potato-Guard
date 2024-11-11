@@ -1,5 +1,6 @@
 env
 .idea/
 .gradle/
+dataset/
 PlantVillage/
 .ipynb_checkpoints/
