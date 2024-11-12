@@ -1,6 +1,7 @@
 package com.example.potatoguard.view.activity;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,16 +9,21 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.potatoguard.R;
+import com.example.potatoguard.model.PlantHealthResponse;
 import com.example.potatoguard.utils.ImageUtility;
+import com.example.potatoguard.viewmodel.MainViewModel;
 import com.squareup.picasso.Picasso;
+
+import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -66,25 +72,43 @@ public class MainActivity extends AppCompatActivity {
 
             galleryActivityLauncher.launch(intent);
         });
-
-        /*viewModel = new ViewModelProvider(this).get(WeatherViewModel.class);
-
-        // Observe the weather data from the ViewModel
-        viewModel.getWeatherData("London", "your_api_key_here").observe(this, new Observer<WeatherResponse>() {
-            @Override
-            public void onChanged(WeatherResponse weatherResponse) {
-                if (weatherResponse != null) {
-                    temperatureTextView.setText("Temperature: " + weatherResponse.getMain().getTemp() + "°C");
-                    descriptionTextView.setText("Description: " + weatherResponse.getWeather().get(0).getDescription());
-                } else {
-                    Toast.makeText(WeatherActivity.this, "Error fetching data", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });*/
     }
 
     private void updatePlantImage(ImageView view, Uri plantUri) {
         view.setVisibility(View.VISIBLE);
         Picasso.get().load(plantUri).into(view);
+
+        getPlantHealthDetails(getFileFromUri(plantUri));
+    }
+
+    public File getFileFromUri(Uri uri) {
+        String[] filePathColumn = {MediaStore.Images.Media.DATA};
+        Cursor cursor = getContentResolver().query(uri, filePathColumn, null, null, null);
+
+        if (cursor != null) {
+            cursor.moveToFirst();
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String filePath = cursor.getString(columnIndex);
+            cursor.close();
+
+            return new File(filePath);
+        }
+        return new File("");
+    }
+
+    private void getPlantHealthDetails(File imageFile) {
+        MainViewModel viewModel = new ViewModelProvider(this).get(MainViewModel.class);
+
+        // Observe the weather data from the ViewModel
+        viewModel.getPlantHealthDetails(imageFile).observe(this, new Observer<PlantHealthResponse>() {
+            @Override
+            public void onChanged(PlantHealthResponse weatherResponse) {
+                if (weatherResponse != null) {
+
+                } else {
+                    Toast.makeText(MainActivity.this, "Error fetching data", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 }

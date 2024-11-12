@@ -1,4 +1,4 @@
 package com.example.potatoguard.model;
 
-public class PlantHealth {
+public class PlantHealthResponse {
 }

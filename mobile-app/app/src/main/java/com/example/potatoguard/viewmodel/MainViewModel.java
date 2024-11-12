@@ -1,19 +1,25 @@
 package com.example.potatoguard.viewmodel;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
-public class MainViewModel {
-   /* private final WeatherRepository repository;
-    private LiveData<WeatherResponse> weatherData;
+import com.example.potatoguard.model.PlantHealthResponse;
+import com.example.potatoguard.repository.PlantHealthRepository;
 
-    public WeatherViewModel() {
-        repository = new WeatherRepository();
+import java.io.File;
+
+public class MainViewModel extends ViewModel {
+    private PlantHealthRepository repository;
+    private LiveData<PlantHealthResponse> weatherData;
+
+    public void WeatherViewModel() {
+        repository = new PlantHealthRepository();
     }
 
-    public LiveData<WeatherResponse> getWeatherData(String city, String apiKey) {
+    public LiveData<PlantHealthResponse> getPlantHealthDetails(File imageFile) {
         if (weatherData == null) {
-            weatherData = repository.getWeather(city, apiKey);
+            weatherData = repository.getPlantHealthInfo(imageFile);
         }
         return weatherData;
-    }*/
+    }
 }

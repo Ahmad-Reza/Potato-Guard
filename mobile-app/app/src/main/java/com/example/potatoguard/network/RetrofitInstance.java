@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitInstance {
     private static Retrofit retrofit;
-    private static String BASE_URL = "";
+    private static final String BASE_URL = "https://us-central1-hazel-sky-441319-d2.cloudfunctions.net";
 
     private static Retrofit getRetrofitInstance() {
         if (retrofit == null) {
