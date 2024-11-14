@@ -9,17 +9,17 @@ import com.example.potatoguard.repository.PlantHealthRepository;
 import java.io.File;
 
 public class MainViewModel extends ViewModel {
-    private PlantHealthRepository repository;
-    private LiveData<PlantHealthResponse> weatherData;
+    private final PlantHealthRepository repository;
+    private LiveData<PlantHealthResponse> plantData;
 
-    public void WeatherViewModel() {
+    public MainViewModel() {
         repository = new PlantHealthRepository();
     }
 
     public LiveData<PlantHealthResponse> getPlantHealthDetails(File imageFile) {
-        if (weatherData == null) {
-            weatherData = repository.getPlantHealthInfo(imageFile);
+        if (plantData == null) {
+            plantData = repository.getPlantHealthInfo(imageFile);
         }
-        return weatherData;
+        return plantData;
     }
 }
