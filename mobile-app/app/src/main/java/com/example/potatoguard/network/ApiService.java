@@ -2,13 +2,14 @@ package com.example.potatoguard.network;
 
 import com.example.potatoguard.model.PlantHealthResponse;
 
-import java.io.File;
-
+import okhttp3.MultipartBody;
 import retrofit2.Call;
-import retrofit2.http.GET;
-import retrofit2.http.Query;
+import retrofit2.http.Multipart;
+import retrofit2.http.POST;
+import retrofit2.http.Part;
 
 public interface ApiService {
-    @GET("/predict")
-    Call<PlantHealthResponse> getPlantHealthInfo(@Query("file") File plantImage);
+    @Multipart
+    @POST("/predict")
+    Call<PlantHealthResponse> getPlantHealthInfo(@Part MultipartBody.Part file);
 }

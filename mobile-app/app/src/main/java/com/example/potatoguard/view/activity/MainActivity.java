@@ -1,5 +1,6 @@
 package com.example.potatoguard.view.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -8,17 +9,16 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.potatoguard.R;
-import com.example.potatoguard.model.PlantHealthResponse;
 import com.example.potatoguard.utils.ImageUtility;
 import com.example.potatoguard.viewmodel.MainViewModel;
 import com.squareup.picasso.Picasso;
@@ -26,6 +26,8 @@ import com.squareup.picasso.Picasso;
 import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
+    private TextView tvDescription, tvLabel, tvConfidence;
+    private LinearLayout layoutPrediction, layoutProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,12 +38,17 @@ public class MainActivity extends AppCompatActivity {
         ImageView clearBtn = findViewById(R.id.button_clear);
         clearBtn.setOnClickListener(v -> {
             plantImage.setVisibility(View.GONE);
+            layoutPrediction.setVisibility(View.GONE);
+
+            tvDescription.setVisibility(View.VISIBLE);
         });
 
-        TextView healthInfo = findViewById(R.id.tv_plant_health_info);
-        healthInfo.setOnClickListener(v -> {
+        layoutProgress = findViewById(R.id.progress_bar);
+        tvDescription = findViewById(R.id.tv_description);
 
-        });
+        tvLabel = findViewById(R.id.tv_label);
+        tvConfidence = findViewById(R.id.tv_confidence);
+        layoutPrediction = findViewById(R.id.layout_prediction);
 
         ActivityResultLauncher<Intent> cameraActivityLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
             Bitmap imageBitmap = result.getData() != null ? (Bitmap) result.getData().getExtras().get("data") : null;
@@ -78,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         view.setVisibility(View.VISIBLE);
         Picasso.get().load(plantUri).into(view);
 
-        getPlantHealthDetails(getFileFromUri(plantUri));
+        getPlantHealthDetails(this, getFileFromUri(plantUri));
     }
 
     public File getFileFromUri(Uri uri) {
@@ -96,19 +103,26 @@ public class MainActivity extends AppCompatActivity {
         return new File("");
     }
 
-    private void getPlantHealthDetails(File imageFile) {
+    private void getPlantHealthDetails(Context context, File file) {
+        layoutProgress.setVisibility(View.VISIBLE);
         MainViewModel viewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
         // Observe the weather data from the ViewModel
-        viewModel.getPlantHealthDetails(imageFile).observe(this, new Observer<PlantHealthResponse>() {
-            @Override
-            public void onChanged(PlantHealthResponse weatherResponse) {
-                if (weatherResponse != null) {
+        viewModel.getPlantHealthDetails(context, file).observe(this, weatherResponse -> {
+            if (weatherResponse != null) {
+                String labelMessage = "Label - " + weatherResponse.getDiseaseLabel();
+                tvLabel.setText(labelMessage);
 
-                } else {
-                    Toast.makeText(MainActivity.this, "Error fetching data", Toast.LENGTH_SHORT).show();
-                }
+                String confidenceMsg = "Confidence - " + weatherResponse.getConfidence() + "%";
+                tvConfidence.setText(confidenceMsg);
+
+                tvDescription.setVisibility(View.GONE);
+                layoutPrediction.setVisibility(View.VISIBLE);
+            } else {
+                Toast.makeText(MainActivity.this, "Error fetching data", Toast.LENGTH_SHORT).show();
             }
+
+            layoutProgress.setVisibility(View.GONE);
         });
     }
 }

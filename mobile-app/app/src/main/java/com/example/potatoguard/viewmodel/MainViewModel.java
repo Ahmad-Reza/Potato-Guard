@@ -1,5 +1,7 @@
 package com.example.potatoguard.viewmodel;
 
+import android.content.Context;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -16,9 +18,9 @@ public class MainViewModel extends ViewModel {
         repository = new PlantHealthRepository();
     }
 
-    public LiveData<PlantHealthResponse> getPlantHealthDetails(File imageFile) {
+    public LiveData<PlantHealthResponse> getPlantHealthDetails(Context context, File imageFile) {
         if (plantData == null) {
-            plantData = repository.getPlantHealthInfo(imageFile);
+            plantData = repository.getPlantHealthInfo(context, imageFile);
         }
         return plantData;
     }
