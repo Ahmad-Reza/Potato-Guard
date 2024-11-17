@@ -43,9 +43,17 @@ pip install tensorflow keras opencv-python pillow
 - Obtain the APK file from the repository's Releases section or [Download the APK](https://github.com/Ahmad-Reza/Potato-Guard/releases/download/v1.0.0/app-debug.apk).
 
 **2. Launch the App: Open the app on your Android device.**
+<div class="row">
+    <img src="https://raw.githubusercontent.com/Ahmad-Reza/Potato-Guard/refs/heads/main/first.png" style="padding:15px" height="380" width="200">
+    <img src="https://raw.githubusercontent.com/Ahmad-Reza/Potato-Guard/refs/heads/main/processing.png" style="padding:15px" height="380" width="200">
+    <img src="https://raw.githubusercontent.com/Ahmad-Reza/Potato-Guard/refs/heads/main/result.png" style="padding:15px" height="380" width="200">  
+</div>
+
 **3. Capture or Upload:**
 - Capture: Use the app's camera to take a photo of the potato plant leaf.
 - Upload: Select an existing image from your device's gallery.
+
+
 **4. Get Results:** The app processes the image and displays the predicted disease category (healthy, late blight, or early blight).
   
 ### API Usage
