@@ -96,5 +96,4 @@ git push origin feature-or-bugfix-branch-name
 
 ---
 
-## License
-This project is licensed under the MIT License.
+Thank you for visiting ✨✨✨
