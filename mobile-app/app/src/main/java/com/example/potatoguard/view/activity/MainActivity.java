@@ -1,5 +1,6 @@
 package com.example.potatoguard.view.activity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -26,8 +27,9 @@ import com.squareup.picasso.Picasso;
 import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
+    private ProgressDialog progressDialog;
     private TextView tvDescription, tvLabel, tvConfidence;
-    private LinearLayout layoutPrediction, layoutProgress;
+    private LinearLayout layoutPrediction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
             tvDescription.setVisibility(View.VISIBLE);
         });
 
-        layoutProgress = findViewById(R.id.progress_bar);
         tvDescription = findViewById(R.id.tv_description);
 
         tvLabel = findViewById(R.id.tv_label);
@@ -52,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
 
         ActivityResultLauncher<Intent> cameraActivityLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
             Bitmap imageBitmap = result.getData() != null ? (Bitmap) result.getData().getExtras().get("data") : null;
-
             ImageUtility imageUtility = new ImageUtility(getApplicationContext());
             Uri plantUri = imageBitmap != null ? imageUtility.getUriFromBitmap(imageBitmap) : null;
 
@@ -62,13 +62,11 @@ public class MainActivity extends AppCompatActivity {
         ImageView cameraBtn = findViewById(R.id.button_camera);
         cameraBtn.setOnClickListener(v -> {
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
             cameraActivityLauncher.launch(intent);
         });
 
         ActivityResultLauncher<Intent> galleryActivityLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
             Uri plantUri = result.getData() != null ? result.getData().getData() : null;
-
             updatePlantImage(plantImage, plantUri);
         });
 
@@ -76,9 +74,21 @@ public class MainActivity extends AppCompatActivity {
         galleryBtn.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_PICK);
             intent.setType("image/png");
-
             galleryActivityLauncher.launch(intent);
         });
+    }
+
+    private void showProgressDialog(boolean isShow) {
+        if (progressDialog == null) {
+            progressDialog = new ProgressDialog(this);
+
+            progressDialog.setTitle("Please wait");
+            progressDialog.setMessage("We are getting plant disease details.");
+            progressDialog.setCanceledOnTouchOutside(false);
+        }
+
+        if (isShow) progressDialog.show();
+        else progressDialog.dismiss();
     }
 
     private void updatePlantImage(ImageView view, Uri plantUri) {
@@ -104,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getPlantHealthDetails(Context context, File file) {
-        layoutProgress.setVisibility(View.VISIBLE);
+        showProgressDialog(true);
         MainViewModel viewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
         // Observe the weather data from the ViewModel
@@ -122,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Error fetching data", Toast.LENGTH_SHORT).show();
             }
 
-            layoutProgress.setVisibility(View.GONE);
+            showProgressDialog(false);
         });
     }
 }

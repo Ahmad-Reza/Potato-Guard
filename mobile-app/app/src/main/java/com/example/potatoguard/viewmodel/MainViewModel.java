@@ -19,9 +19,6 @@ public class MainViewModel extends ViewModel {
     }
 
     public LiveData<PlantHealthResponse> getPlantHealthDetails(Context context, File imageFile) {
-        if (plantData == null) {
-            plantData = repository.getPlantHealthInfo(context, imageFile);
-        }
-        return plantData;
+        return repository.getPlantHealthInfo(context, imageFile);
     }
 }
