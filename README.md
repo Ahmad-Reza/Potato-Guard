@@ -40,7 +40,8 @@ pip install tensorflow keras opencv-python pillow
 ## Usage
 ### Android App
 **1. Download and Install:**
-- Obtain the APK file from the repository's Releases section or Google Play Store.
+- Obtain the APK file from the repository's Releases section or [Download the APK](https://github.com/Ahmad-Reza/Potato-Guard/releases/download/v1.0.0/app-debug.apk).
+
 **2. Launch the App: Open the app on your Android device.**
 **3. Capture or Upload:**
 - Capture: Use the app's camera to take a photo of the potato plant leaf.
