@@ -24,8 +24,8 @@ git clone https://github.com/Ahmad-Reza/Potato-Guard.git
 ```
 
 **2. Set Up Environment**
-- Python: Ensure you have Python 3.x installed.
-- Required Libraries: Install the necessary libraries using pip:
+- **Python:** Ensure you have Python 3.x installed.
+- **Required Libraries:** Install the necessary libraries using pip:
 ```bash
 conda install matplotlib numpy notebook tensorflow=2.12.0
 ```
@@ -33,9 +33,9 @@ conda install matplotlib numpy notebook tensorflow=2.12.0
 pip install tensorflow-addons tensorflow-model-optimization
 ```
 **2. Configure Google Cloud Platform**
-- Create a Project: Set up a Google Cloud Platform (GCP) project and enable the necessary APIs.
-- Storage Bucket: Create a Cloud Storage bucket to store your model and configure API endpoints.
-- Android Integration: Update your Android app to interact with the deployed GCP API.
+- **Create a Project:** Set up a Google Cloud Platform (GCP) project and enable the necessary APIs.
+- **Storage Bucket:** Create a Cloud Storage bucket to store your model and configure API endpoints.
+- **Android Integration:** Update your Android app to interact with the deployed GCP API.
 
 ---
 
@@ -50,8 +50,8 @@ pip install tensorflow-addons tensorflow-model-optimization
   <img src="https://raw.githubusercontent.com/Ahmad-Reza/Potato-Guard/refs/heads/main/extras/first.png" style="padding:15px" height="400" width="200">
 
 **3. Capture or Upload:**
-- Capture: Use the app's camera to take a photo of the potato plant leaf.
-- Upload: Select an existing image from your device's gallery.
+- **Capture:** Use the app's camera to take a photo of the potato plant leaf.
+- **Upload:** Select an existing image from your device's gallery.
 
   <img src="https://raw.githubusercontent.com/Ahmad-Reza/Potato-Guard/refs/heads/main/extras/processing.png" style="padding:15px" height="400" width="200">
 
@@ -88,9 +88,9 @@ pip install tensorflow-addons tensorflow-model-optimization
 ---
 
 ## Deployment
-- Model Deployment:
-  - The trained model was deployed to Google Cloud Platform using TensorFlow Serving or similar frameworks.
-- API Endpoint:
+- **Model Deployment:**
+  - The trained model was deployed to Google Cloud Platform using TensorFlow Serving.
+- **API Endpoint:**
   - A RESTful API endpoint was created to expose the model's prediction capabilities to clients.
 
 ---
