@@ -13,7 +13,6 @@ A project to detect and classify potato plant diseases (healthy, late blight, or
 - [Dataset](#dataset)
 - [Deployment](#deployment)
 - [Contributing](#contributing)
-- [License](#license)
 
 ---
 
@@ -21,14 +20,17 @@ A project to detect and classify potato plant diseases (healthy, late blight, or
 
 **1. Clone the Repository**
 ```bash
-git clone https://github.com/your-username/potato-disease-classification.git
+git clone https://github.com/Ahmad-Reza/Potato-Guard.git
 ```
 
 **2. Set Up Environment**
 - Python: Ensure you have Python 3.x installed.
 - Required Libraries: Install the necessary libraries using pip:
 ```bash
-pip install tensorflow keras opencv-python pillow
+conda install matplotlib numpy notebook tensorflow=2.12.0
+```
+```bash
+pip install tensorflow-addons tensorflow-model-optimization
 ```
 **2. Configure Google Cloud Platform**
 - Create a Project: Set up a Google Cloud Platform (GCP) project and enable the necessary APIs.
@@ -43,25 +45,28 @@ pip install tensorflow keras opencv-python pillow
 - Obtain the APK file from the repository's Releases section or [Download the APK](https://github.com/Ahmad-Reza/Potato-Guard/releases/download/v1.0.0/app-debug.apk).
 
 **2. Launch the App: Open the app on your Android device.**
-<div class="row">
-    <img src="https://raw.githubusercontent.com/Ahmad-Reza/Potato-Guard/refs/heads/main/first.png" style="padding:15px" height="380" width="200">
-    <img src="https://raw.githubusercontent.com/Ahmad-Reza/Potato-Guard/refs/heads/main/processing.png" style="padding:15px" height="380" width="200">
-    <img src="https://raw.githubusercontent.com/Ahmad-Reza/Potato-Guard/refs/heads/main/result.png" style="padding:15px" height="380" width="200">  
-</div>
+- Capture an image of the potato plant using the camera.
+
+  <img src="https://raw.githubusercontent.com/Ahmad-Reza/Potato-Guard/refs/heads/main/first.png" style="padding:15px" height="400" width="200">
 
 **3. Capture or Upload:**
 - Capture: Use the app's camera to take a photo of the potato plant leaf.
 - Upload: Select an existing image from your device's gallery.
 
+  <img src="https://raw.githubusercontent.com/Ahmad-Reza/Potato-Guard/refs/heads/main/processing.png" style="padding:15px" height="400" width="200">
 
-**4. Get Results:** The app processes the image and displays the predicted disease category (healthy, late blight, or early blight).
-  
+**4. Get Results:** The app processes the image and displays the predicted disease category (healthy, late blight, or early blight) and confidence.
+
+  <img src="https://raw.githubusercontent.com/Ahmad-Reza/Potato-Guard/refs/heads/main/result.png" style="padding:15px" height="400" width="200">  
+
 ### API Usage
-**1. Obtain API Key:** Retrieve the API key from your GCP project.
+**1. Allow permission:** Add allUsers permission with cloud functions invoker value to public use of API.
+
 **2. Send Image Request:**
-- Use an HTTP POST request to send image data to the API endpoint.
+- Use an HTTP POST request to send image file data to the API endpoint.
+
 **3. Receive Prediction:**
-- The API responds with a JSON payload containing the predicted disease category.
+- The API responds with a JSON payload containing the predicted disease category and model predict confident.
 
 ---
 
@@ -92,11 +97,13 @@ pip install tensorflow keras opencv-python pillow
 
 ## Contributing
 **1. Fork the Repository:** Create a fork of this repository.
+
 **2. Create a Branch:**
 ```bash
 git checkout -b feature-or-bugfix-branch-name
 ```
 **3. Make Changes:** Add your feature or fix issues in the project.
+
 **4. Push to GitHub:**
 ```bash
 git push origin feature-or-bugfix-branch-name
@@ -105,4 +112,4 @@ git push origin feature-or-bugfix-branch-name
 
 ---
 
-Thank you for visiting ✨✨✨
+Thank you for visiting✨ Happy coding!🚀
