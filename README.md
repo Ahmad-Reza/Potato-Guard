@@ -47,17 +47,17 @@ pip install tensorflow-addons tensorflow-model-optimization
 **2. Launch the App: Open the app on your Android device.**
 - Capture an image of the potato plant using the camera.
 
-  <img src="https://raw.githubusercontent.com/Ahmad-Reza/Potato-Guard/refs/heads/main/first.png" style="padding:15px" height="400" width="200">
+  <img src="https://raw.githubusercontent.com/Ahmad-Reza/Potato-Guard/refs/heads/main/extras/first.png" style="padding:15px" height="400" width="200">
 
 **3. Capture or Upload:**
 - Capture: Use the app's camera to take a photo of the potato plant leaf.
 - Upload: Select an existing image from your device's gallery.
 
-  <img src="https://raw.githubusercontent.com/Ahmad-Reza/Potato-Guard/refs/heads/main/processing.png" style="padding:15px" height="400" width="200">
+  <img src="https://raw.githubusercontent.com/Ahmad-Reza/Potato-Guard/refs/heads/main/extras/processing.png" style="padding:15px" height="400" width="200">
 
 **4. Get Results:** The app processes the image and displays the predicted disease category (healthy, late blight, or early blight) and confidence.
 
-  <img src="https://raw.githubusercontent.com/Ahmad-Reza/Potato-Guard/refs/heads/main/result.png" style="padding:15px" height="400" width="200">  
+  <img src="https://raw.githubusercontent.com/Ahmad-Reza/Potato-Guard/refs/heads/main/extras/result.png" style="padding:15px" height="400" width="200">  
 
 ### API Usage
 **1. Allow permission:** Add allUsers permission with cloud functions invoker value to public use of API.
